@@ -1,6 +1,7 @@
 # Load necessary packages
 library(readr)
 library(tibble)
+library(sf)
 
 # Read CSV files into tibbles
 altura_cobertura <- read_csv("Censos de vegetacion - AlturaCobertura.csv")
@@ -15,3 +16,6 @@ formacion_altura_cobertura <- read_csv("Censos de vegetacion - FormacionAlturaCo
 inventario_flora <- read_csv("Censos de vegetacion - InventarioFlora.csv")
 inventario_vegetal <- read_csv("Censos de vegetacion - InventarioVegetal.csv")
 observadores <- read_csv("Censos de vegetacion - Observadores.csv")
+
+# Read the csv file 'Censos de vegetacion - Departamentos.csv' as a geographic dataset
+departamentos <- st_read("Censos de vegetacion - Departamentos.csv")
