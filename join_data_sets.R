@@ -7,6 +7,8 @@ final_dataset <- inventario_vegetal %>%
   left_join(estrato, by = "idEstrato") %>%
   left_join(especies, by = "idEspecie") %>%
   left_join(cobertura, by = "idCobertura") %>%
+  
+  
   left_join(fisonomia_cobertura, by = "idInventario") %>%
   left_join(fisonomia, by = "idFisonomia") %>%
   left_join(altura_cobertura, by = "idAlturaCobertura") %>%
@@ -15,5 +17,13 @@ final_dataset <- inventario_vegetal %>%
   left_join(auxiliar_geo, by = "censo") %>%
   left_join(observadores, by = "idObservador")
 
+# Union de la tabla principal con las tablas base - Inventario Flora.
+inventario_flora <- inner_join(inventario_flora, estrato) 
+inventario_flora <- inner_join(inventario_flora, especies)
+inventario_flora <- inner_join(inventario_flora, cobertura)
+
+
+
+inventario_flora <- inner_join(inventario_flora, fisonomia_cobertura)
 # Save the final dataset to a CSV file
 write_csv(final_dataset, "final_dataset.csv")

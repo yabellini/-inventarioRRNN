@@ -5,7 +5,6 @@ library(sf)
 
 # Read CSV files into tibbles
 altura_cobertura <- read_csv("Censos de vegetacion - AlturaCobertura.csv")
-auxiliar_geo <- read_csv("Censos de vegetacion - AuxiliarGEO.csv")
 cobertura <- read_csv("Censos de vegetacion - Cobertura.csv")
 especies <- read_csv("Censos de vegetacion - Especies.csv")
 estrato <- read_csv("Censos de vegetacion - Estrato.csv")
@@ -19,10 +18,10 @@ observadores <- read_csv("Censos de vegetacion - Observadores.csv")
 
 # Geographic data
 
-Censos_de_vegetacion_Localidades <- read_csv("Censos de vegetacion - Localidades.csv", 
-                                             +     locale = locale(decimal_mark = ",", grouping_mark = "."))
+localidad <- read_csv("Censos de vegetacion - Localidades.csv", 
+                      locale = locale(decimal_mark = ",", grouping_mark = ".")) 
 
-localidad <- st_as_sf(Censos_de_vegetacion_Localidades, coords=c("longitudLocalidad","latitudLocalidad"), crs=4326)
+localidad <- st_as_sf(localidad, coords=c("longitudLocalidad","latitudLocalidad"), crs=4326)
 
 ggplot() +
   geom_sf(data = localidad) +
@@ -36,5 +35,15 @@ departamentos <- st_as_sf(departamentos, wkt = "geomTDepartamento")
 
 ggplot() +
   geom_sf(data = departamentos) +
-  ggtitle("Localidades")
+  ggtitle("Departamentos")
 
+# Read the csv file 'Censos de vegetacion - AuxiliarGEO.csv' as a geographic dataset
+
+auxiliar_geo <- read_csv("Censos de vegetacion - AuxiliarGEO.csv", 
+                         locale = locale(decimal_mark = ",", grouping_mark = "."))
+
+auxiliar_geo <- st_as_sf(auxiliar_geo, coords=c("latitudInventario","longitudInventario"))
+
+ggplot() +
+  geom_sf(data = auxiliar_geo) +
+  ggtitle("Censos")
