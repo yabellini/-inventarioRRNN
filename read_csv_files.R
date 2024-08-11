@@ -17,5 +17,24 @@ inventario_flora <- read_csv("Censos de vegetacion - InventarioFlora.csv")
 inventario_vegetal <- read_csv("Censos de vegetacion - InventarioVegetal.csv")
 observadores <- read_csv("Censos de vegetacion - Observadores.csv")
 
+# Geographic data
+
+Censos_de_vegetacion_Localidades <- read_csv("Censos de vegetacion - Localidades.csv", 
+                                             +     locale = locale(decimal_mark = ",", grouping_mark = "."))
+
+localidad <- st_as_sf(Censos_de_vegetacion_Localidades, coords=c("longitudLocalidad","latitudLocalidad"), crs=4326)
+
+ggplot() +
+  geom_sf(data = localidad) +
+  ggtitle("Localidades")
+
+
 # Read the csv file 'Censos de vegetacion - Departamentos.csv' as a geographic dataset
-departamentos <- st_read("Censos de vegetacion - Departamentos.csv")
+departamentos <- st_read("Censos de vegetacion - DepartamentosLP.csv")
+
+departamentos <- st_as_sf(departamentos, wkt = "geomTDepartamento")
+
+ggplot() +
+  geom_sf(data = departamentos) +
+  ggtitle("Localidades")
+
